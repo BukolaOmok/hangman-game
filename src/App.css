@@ -1,0 +1,17 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.group-content {
+  background: #474545;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 10px 10px 10px rgba(241, 139, 139, 0.3);
+  display: flex;
+}
+
+
+
