@@ -6,12 +6,10 @@ export default function PigGame() {
   const [scorePlayer2, setScorePlayer2] = React.useState(0);
   const [presentRoll, setPresentRoll] = React.useState("-");
   const [turn, setTurn] = React.useState(0);
+  const [stick, setStick] = React.useState(true);
   const [emojiPlayer1, setEmojiplayer1] = React.useState("🐽");
   const [emojiPlayer2, setEmojiplayer2] = React.useState("");
-  const [stick, setStick] = React.useState(true);
-  const [emojiUpdate, setEmojiUpdate] = React.useState(false);
   const [maxCount, setMaxCount] = React.useState(100);
-  const [newGame, setNewGame] = React.useState(true);
 
   const rollTurnSection = () => {
     const randomRoll = Math.floor(Math.random() * (7 - 1) + 1);
@@ -32,62 +30,49 @@ export default function PigGame() {
     }
 
     if (stick) {
+      if (scorePlayer1 < maxCount) {
+        setEmojiplayer1("");
+        setEmojiplayer2("🐽");
+      } else if (scorePlayer1 >= maxCount) {
+        setEmojiplayer1("🏆");
+        setEmojiplayer2("");
+      }
+
       setScorePlayer1((scorePlayer1) => scorePlayer1 + turn);
-      emojiSection();
       setTurn(0);
+
     } else {
+      if (scorePlayer2 < maxCount) {
+        setEmojiplayer2("");
+        setEmojiplayer1("🐽");
+      } else if (scorePlayer2 >= maxCount){
+        setEmojiplayer2("🏆");
+        setEmojiplayer1("");
+      }
       setScorePlayer2((scorePlayer2) => scorePlayer2 + turn);
-      emojiSection();
       setTurn(0);
     }
-  };
-
-  const emojiSection = () => {
-    if (emojiUpdate) {
-      setEmojiUpdate(false);
-    } else {
-      setEmojiUpdate(true);
-    }
-
-    if (emojiUpdate) {
-      setEmojiplayer1("🐽");
-      setEmojiplayer2("");
-    } else {
-      setEmojiplayer1("");
-      setEmojiplayer2("🐽");
-    }
+    
   };
 
   const updateGameSection = () => {
-
+    setStick(true);
     setScorePlayer1(0);
     setScorePlayer2(0);
     setEmojiplayer1("🐽");
     setEmojiplayer2("");
     setPresentRoll("-");
     setTurn(0);
-    setStick(true);
-    setEmojiUpdate(true);
   };
 
   const newGameSection = () => {
-    setNewGame(true);
     setMaxCount(100);
     updateGameSection();
   };
 
   const newShortGameSection = () => {
-    setNewGame(false);
     setMaxCount(30);
     updateGameSection();
-  };
-
-  const changePigToGold = () => {
-    if (scorePlayer1 >= maxCount) {
-      setEmojiplayer1("🏆");
-    } else if (scorePlayer2 >= maxCount) {
-      setEmojiplayer2("🏆");
-    }
   };
 
   return (
@@ -97,17 +82,16 @@ export default function PigGame() {
       <div className="score-counter-player-1">
         <p className="score-style">{emojiPlayer1}</p>
         <p className="score-style">P1 Score: {scorePlayer1}</p>
-        </div>
+      </div>
 
-        <div className="score-counter-player-2">
+      <div className="score-counter-player-2">
         <p className="score-style">{emojiPlayer2}</p>
         <p className="score-style">P2 Score: {scorePlayer2}</p>
-        </div>
-      
+      </div>
 
       <div className="current-score-counter">
         <button
-          className="current-score-style"
+          className="roll-button-style"
           disabled={scorePlayer1 >= maxCount || scorePlayer2 >= maxCount}
           onClick={rollTurnSection}
         >
@@ -116,7 +100,7 @@ export default function PigGame() {
         <p className="current-score-style">Last Roll:{presentRoll} </p>
         <p className="current-score-style">Turn Total: {turn}</p>
         <button
-          className="current-score-style"
+          className="stick-button-style"
           disabled={scorePlayer1 >= maxCount || scorePlayer2 >= maxCount}
           onClick={stickSection}
         >
