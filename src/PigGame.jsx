@@ -51,17 +51,41 @@ export default function PigGame() {
     updateGameSection();
   };
 
+  const emojiVisibilityPlayer1 = () => {
+    if (currentPlayer) {
+      if (scorePlayer1 >= maxCount){
+        return "🏆"
+      } else
+      return "🐽";
+    } else {
+     "";
+    } 
+  }
+    const  emojiVisibilityPlayer2 = () => {
+      if (!currentPlayer) {
+        if (scorePlayer2 >= maxCount){
+          return "🏆"
+        } else
+        return "🐽";
+      } else {
+       "";
+      }
+    };
+  
+    
+
+
   return (
     <div className="group-content">
       <h1 className="heading-style">Pig Game by Bukola! 🐷</h1>
       <h3 className="smaller-heading-style">(First to {maxCount})</h3>
       <div className="score-counter-player-1">
-        {/* <p className="score-style">{emoji}</p> */}
+        <p className="score-style">{emojiVisibilityPlayer1()}</p>
         <p className="score-style">P1 Score: {scorePlayer1}</p>
       </div>
 
       <div className="score-counter-player-2">
-        {/* <p className="score-style">{emoji}</p> */}
+        <p className="score-style">{emojiVisibilityPlayer2()}</p>
         <p className="score-style">P2 Score: {scorePlayer2}</p>
       </div>
 
