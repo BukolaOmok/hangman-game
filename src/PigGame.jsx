@@ -53,20 +53,32 @@ export default function PigGame() {
 
   const emojiVisibilityPlayer1 = () => {
     if (currentPlayer) {
+      if (scorePlayer2 >= maxCount) {
+        return "";
+      } else {
+        return "🐽";
+      }
+    } else {
       if (scorePlayer1 >= maxCount) {
         return "🏆";
-      } else return "🐽";
-    } else {
-      ("");
+      } else {
+        return "";
+      }
     }
   };
   const emojiVisibilityPlayer2 = () => {
     if (!currentPlayer) {
+      if (scorePlayer1 >= maxCount) {
+        return "";
+      } else {
+        return "🐽";
+      }
+    } else {
       if (scorePlayer2 >= maxCount) {
         return "🏆";
-      } else return "🐽";
-    } else {
-      ("");
+      } else {
+        return "";
+      }
     }
   };
 
