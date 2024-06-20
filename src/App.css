@@ -10,7 +10,21 @@
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 10px 10px 10px rgba(241, 139, 139, 0.3);
+}
+
+.score-counter-player-1 {
   display: flex;
+  justify-content: center;
+}
+
+.score-counter-player-2 {
+  display: flex;
+  justify-content: center;
+}
+
+.current-score-counter{
+  display: flex;
+  justify-content: space-around; 
 }
 
 

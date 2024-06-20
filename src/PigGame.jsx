@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React from "react";
 
 export default function PigGame() {
   const [scorePlayer1, setScorePlayer1] = React.useState(0);
@@ -9,7 +9,7 @@ export default function PigGame() {
   const [emojiPlayer1, setEmojiplayer1] = React.useState("🐽");
   const [emojiPlayer2, setEmojiplayer2] = React.useState("");
   const [stick, setStick] = React.useState(true);
-  const [emojiUpdate, setEmojiUpdate] = React.useState(true);
+  const [emojiUpdate, setEmojiUpdate] = React.useState(false);
   const [maxCount, setMaxCount] = React.useState(100);
   const [newGame, setNewGame] = React.useState(true);
 
@@ -59,6 +59,7 @@ export default function PigGame() {
   };
 
   const updateGameSection = () => {
+
     setScorePlayer1(0);
     setScorePlayer2(0);
     setEmojiplayer1("🐽");
@@ -93,12 +94,16 @@ export default function PigGame() {
     <div className="group-content">
       <h1 className="heading-style">Pig Game by Bukola! 🐷</h1>
       <h3 className="smaller-heading-style">(First to {maxCount})</h3>
-      <div className="score-counter">
+      <div className="score-counter-player-1">
         <p className="score-style">{emojiPlayer1}</p>
         <p className="score-style">P1 Score: {scorePlayer1}</p>
+        </div>
+
+        <div className="score-counter-player-2">
         <p className="score-style">{emojiPlayer2}</p>
         <p className="score-style">P2 Score: {scorePlayer2}</p>
-      </div>
+        </div>
+      
 
       <div className="current-score-counter">
         <button
