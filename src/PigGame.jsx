@@ -2,7 +2,7 @@ import "./App.css";
 import React from "react";
 
 export default function PigGame() {
-  const [currentPlayer, setCurrentPlayer] = React.useState(true)
+  const [currentPlayer, setCurrentPlayer] = React.useState(true);
   const [scorePlayer1, setScorePlayer1] = React.useState(0);
   const [scorePlayer2, setScorePlayer2] = React.useState(0);
   const [presentRoll, setPresentRoll] = React.useState("-");
@@ -12,30 +12,29 @@ export default function PigGame() {
   const rollTurnSection = () => {
     const randomRoll = Math.floor(Math.random() * (7 - 1) + 1);
     setPresentRoll(randomRoll);
-     if (currentPlayer && randomRoll === 1) {
+    if (currentPlayer && randomRoll === 1) {
       setTurn(randomRoll * 0);
-      setCurrentPlayer(false) 
+      setCurrentPlayer(false);
     } else if (!currentPlayer && randomRoll === 1) {
-        setTurn(randomRoll * 0);
-        setCurrentPlayer(true)
+      setTurn(randomRoll * 0);
+      setCurrentPlayer(true);
     } else setTurn((turn) => turn + randomRoll);
   };
 
-
   const stickSection = () => {
-    if (currentPlayer && presentRoll > 1 ){
+    if (currentPlayer && presentRoll > 1) {
       setScorePlayer1((scorePlayer1) => scorePlayer1 + turn);
       setTurn(0);
-      setCurrentPlayer (false)
-    } else if (!currentPlayer && presentRoll > 1 ) {
+      setCurrentPlayer(false);
+    } else if (!currentPlayer && presentRoll > 1) {
       setScorePlayer2((scorePlayer2) => scorePlayer2 + turn);
       setTurn(0);
-      setCurrentPlayer (true)
-    } 
-}
+      setCurrentPlayer(true);
+    }
+  };
 
   const updateGameSection = () => {
-    setCurrentPlayer("Player 1")
+    setCurrentPlayer("Player 1");
     setScorePlayer1(0);
     setScorePlayer2(0);
     setPresentRoll("-");

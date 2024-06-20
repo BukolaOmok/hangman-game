@@ -6,8 +6,8 @@
 }
 
 .group-content {
-  background: #474545;
-  padding: 1.5rem;
+  background: #000000;
+  padding: 2rem;
   border-radius: 8px;
   box-shadow: 10px 10px 10px rgba(241, 139, 139, 0.3);
 }
@@ -39,6 +39,17 @@
   color: white;
   border-radius: 1rem;
   padding: 1rem
+}
+
+.new-game-buttons{
+  display: flex;
+  justify-content: center;
+}
+
+.button-style{
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
 }
 
 
