@@ -15,54 +15,19 @@
   box-shadow: 10px 10px 10px rgba(241, 139, 139, 0.3);
 }
 
-.score-counter-player-1 {
+.group-letter {
   display: flex;
   justify-content: center;
   font-size: 1.2rem;
+  flex-direction: column;
 }
 
-.score-counter-player-2 {
-  display: flex;
-  justify-content: center;
-  font-size: 1.2rem;
-}
-
-.current-score-counter{
-  display: flex;
-  justify-content: space-around; 
-}
-
-.roll-button-style {
-  background-color: green;
-  color: white;
+.letter{
+  background-color: white;
+  color: #000000;
+  align-content: space-between;
   border-radius: 1rem;
-  padding: 1rem;
-  font-size: 1rem;
-}
-
-.stick-button-style{
-  background-color: red;
-  color: white;
-  border-radius: 1rem;
-  padding: 1rem;
-  font-size: 1rem;
-}
-
-.new-game-buttons{
-  display: flex;
-  justify-content: center;
-}
-
-.button-style{
-  margin: 1rem;
-  padding: 1rem;
-  border-radius: 1rem;
-  font-size: 1rem;
-}
-
-.smaller-heading-style {
-  font-size: 1.5rem;
-  font-style: italic;
-  color: pink;
+  padding: 1.2rem;
+  margin-right: 0.5rem
 }
 

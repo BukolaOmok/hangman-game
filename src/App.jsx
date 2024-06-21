@@ -1,10 +1,10 @@
 import "./App.css";
-import PigGame from "./PigGame.jsx";
+import Hangman from "./Hangman.jsx";
 
 export default function App() {
   return (
     <div>
-      <PigGame />
+      <Hangman />
     </div>
   );
 }
