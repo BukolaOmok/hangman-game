@@ -1,10 +1,10 @@
 import "./App.css";
-import Hangman from "./Hangman.jsx";
+import GenerateHangmanDisplayLetters from "./Hangman.jsx";
 
 export default function App() {
   return (
     <div>
-      <Hangman />
+      <GenerateHangmanDisplayLetters />
     </div>
   );
 }
