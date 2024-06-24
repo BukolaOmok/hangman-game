@@ -14,12 +14,18 @@ export default function HangmanGame() {
 
   const updateGuessedLettersArray = (letter) => {
     setGuessedLetters((prevGuessedLetters) => [...prevGuessedLetters, letter]);
+
+    if (!splitWordToGuess.includes(letter)) {
+      setMissesCount((missesCount) => missesCount + 1);
+    } else {
+      revealGuessedLetters(letter);
+    }
   };
 
-  const revealGuessedLetters = () => {
-    const revealedWord = wordToGuess.map((letter, index) => {
-      if (guessedLetters.includes(letter)) {
-        return letter;
+  const revealGuessedLetters = (letter) => {
+    const revealedWord = splitWordToGuess.map((l, index) => {
+      if (guessedLetters.includes(l) || l === letter) {
+        return l;
       } else {
         return "_";
       }
@@ -27,50 +33,26 @@ export default function HangmanGame() {
     setWordToGuess(revealedWord);
   };
 
+  const handleGuesses = (letter) => {
+    if (!guessedLetters.includes(letter)) {
+      updateGuessedLettersArray(letter);
+    }
+  };
 
 
   return (
     <div className="group-content">
       <h1 className="heading-style">Bukola Hangman Game</h1>
       <h3 className="guessed-word-style">{wordToGuess}</h3>
-      <p className="misses-count-style">number of misses:</p>
+      <p className="misses-count-style">number of misses: {missesCount}</p>
 
       <div className="group-letter">
-        <div className="first-ten">
-          <button className="letter">a</button>
-          <button className="letter">b</button>
-          <button className="letter">c</button>
-          <button className="letter">d</button>
-          <button className="letter">e</button>
-          <button className="letter">f</button>
-          <button className="letter">g</button>
-          <button className="letter">h</button>
-          <button className="letter">i</button>
-          <button className="letter">j</button>
-        </div>
-
-        <div className="second-ten">
-          <button className="letter">k</button>
-          <button className="letter">l</button>
-          <button className="letter">m</button>
-          <button className="letter">n</button>
-          <button className="letter">o</button>
-          <button className="letter">p</button>
-          <button className="letter">q</button>
-          <button className="letter">r</button>
-          <button className="letter">s</button>
-          <button className="letter">t</button>
-        </div>
-
-        <div className="last-six">
-          <button className="letter">u</button>
-          <button className="letter">v</button>
-          <button className="letter">w</button>
-          <button className="letter">x</button>
-          <button className="letter">y</button>
-          <button className="letter">z</button>
-        </div>
-      </div>
+        {letterData.map((letter =>
+      <button key={letter} className="letter" onClick={handleGuesses(letter)}>
+      {letter}
+    </button>
+    ))}
+    </div>
     </div>
   );
 }
