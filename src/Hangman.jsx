@@ -3,71 +3,36 @@ import React from "react";
 import letterData from "./letterData";
 
 export default function HangmanGame() {
-  
-  const actualWord = "bukola"
-  
-  
+  const actualWord = "bukola";
+  const splitWordToGuess = actualWord.split("");
 
-  const splitWordToGuess = actualWord.split()
-
-  const [wordToGuess, setWordToGuess] = React.useState(splitWordToGuess);
+  const [wordToGuess, setWordToGuess] = React.useState(
+    splitWordToGuess.map(() => "_ ")
+  );
   const [guessedLetters, setGuessedLetters] = React.useState([]);
-  const [revealLetters, setRevealLetters] = React.useState();
   const [missesCount, setMissesCount] = React.useState(0);
-  const [showGuess, setShowGuess] = React.useState(false);
-
-  const showGuessLogic = () => {
-    if(showGuess){
-        return "_ ".repeat(actualWord.length);
-      } else {
-        ("add the logic of showguest being true")
-      }
-    }
-
-
-
 
   const updateGuessedLettersArray = (letter) => {
-    setGuessedLetters(guessedLetters => [...guessedLetters, letter]);
+    setGuessedLetters((prevGuessedLetters) => [...prevGuessedLetters, letter]);
   };
 
-  
-
-  const revealGuessedLetter = () => {
-    setShowGuess(true)
-    updateGuessedLettersArray(letter);
-    for (let i = 0; i < guessedLetters.length; i++) {
-      if (wordToGuess.includes(guessedLetters[i])) {
-
+  const revealGuessedLetters = () => {
+    const revealedWord = wordToGuess.map((letter, index) => {
+      if (guessedLetters.includes(letter)) {
+        return letter;
+      } else {
+        return "_";
       }
-    }
-  }
-    
-  //   if (guessedLetters.includes(letter)) {
-  //     setRevealLetters((revealLetters) => [...guessedLetters, letter]);
-  //   }
+    });
+    setWordToGuess(revealedWord);
+  };
 
-  // const handleGenerateHangmanDisplayLetter = (guessedLetters, actualWord) => {
 
-  //   };
-
-  //   if(showGuess){
-  //     setShowGuess(true)
-  //   }
-  //     const newWordToGuess = splitWordToGuess.map((letter, index) =>
-  //       displayGuessedLetters.includes(splitWordToGuess[index]) ? letter : "_"
-  //     );
-  //     setWordToGuess(newWordToGuess);
-  //   } else {
-  //     setMissesCount(missesCount => missesCount + 1)
-  //   }
-  // }
-  // };
 
   return (
     <div className="group-content">
       <h1 className="heading-style">Bukola Hangman Game</h1>
-      <h3 className="guessed-word-style">{showGuessLogic}</h3>
+      <h3 className="guessed-word-style">{wordToGuess}</h3>
       <p className="misses-count-style">number of misses:</p>
 
       <div className="group-letter">
