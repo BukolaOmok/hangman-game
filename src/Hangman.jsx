@@ -1,24 +1,32 @@
 import "./App.css";
 import React from "react";
 import letterData from "./letterData";
+import randomWordData from "./randomWordData";
 
 export default function HangmanGame() {
-  const actualWord = "bukola";
-  const splitWordToGuess = actualWord.split("");
+  const pickRandomWord = (randomWordData) => {
+    const randomWordIndex = Math.floor(Math.random() * randomWordData.length);
+    const randomWord = randomWordData[randomWordIndex];
+    return randomWord
+  };
+
+  const [selectedWord, setSelectedWord] = React.useState(pickRandomWord(randomWordData))
+
+  const splitWordToGuess = selectedWord.split("")
+
   const maxMisses = 10;
 
+ 
   const [wordToGuess, setWordToGuess] = React.useState(
     splitWordToGuess.map(() => "_ ")
   );
   const [guessedLetters, setGuessedLetters] = React.useState([]);
   const [missesCount, setMissesCount] = React.useState(0);
- 
 
   const revealGuessedLetters = (letter) => {
     const revealedLetters = wordToGuess.map((char, index) => {
       if (
-        splitWordToGuess[index] === letter ||
-        guessedLetters.includes(splitWordToGuess[index])
+        splitWordToGuess[index] === letter
       ) {
         return splitWordToGuess[index];
       } else {
@@ -32,7 +40,7 @@ export default function HangmanGame() {
     if (!guessedLetters.includes(letter)) {
       const newGuessedLetters = [...guessedLetters, letter];
       setGuessedLetters(newGuessedLetters);
-      if (actualWord.includes(letter)) {
+      if (selectedWord.includes(letter)) {
         revealGuessedLetters(letter, newGuessedLetters);
       } else {
         updateMissesCount();
@@ -44,18 +52,24 @@ export default function HangmanGame() {
     setMissesCount((missesCount) => missesCount + 1);
   };
 
+
+
   const winOrLose = () => {
     if (missesCount >= maxMisses) {
-      return "You lose! Too many misses";
+      return "You lose! Too many misses" && `The word is: ${selectedWord}`;
     } else if (missesCount < maxMisses && !wordToGuess.includes("_ ")) {
       return "You win!";
     }
   };
 
+
+
+
+
   return (
     <div className="group-content">
       <h1 className="heading-style">Bukola Hangman Game</h1>
-      <h3 className="guessed-word-style">{wordToGuess}</h3>
+      <h2 className="guessed-word-style">{wordToGuess}</h2>
       <p>{winOrLose()}</p>
       <p className="misses-count-style">number of misses: {missesCount}</p>
 
@@ -65,7 +79,11 @@ export default function HangmanGame() {
             key={letter}
             className="letter"
             onClick={handleGuesses(letter)}
-            disabled={guessedLetters.includes(letter) || !wordToGuess.includes("_ ") || missesCount >= maxMisses}
+            disabled={
+              guessedLetters.includes(letter) ||
+              !wordToGuess.includes("_ ") ||
+              missesCount >= maxMisses
+            }
           >
             {letter}
           </button>
