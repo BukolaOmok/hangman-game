@@ -12,6 +12,7 @@ export default function HangmanGame() {
   );
   const [guessedLetters, setGuessedLetters] = React.useState([]);
   const [missesCount, setMissesCount] = React.useState(0);
+ 
 
   const revealGuessedLetters = (letter) => {
     const revealedLetters = wordToGuess.map((char, index) => {
@@ -46,8 +47,9 @@ export default function HangmanGame() {
   const winOrLose = () => {
     if (missesCount >= maxMisses) {
       return "You lose! Too many misses";
-    } else if (missesCount < maxMisses && !wordToGuess.includes("_"))
+    } else if (missesCount < maxMisses && !wordToGuess.includes("_")) {
       return "You win!";
+    }
   };
 
   return (
@@ -63,7 +65,7 @@ export default function HangmanGame() {
             key={letter}
             className="letter"
             onClick={handleGuesses(letter)}
-            disabled={guessedLetters.includes(letter)}
+            disabled={guessedLetters.includes(letter) || !wordToGuess.includes("_ ") || missesCount >= maxMisses}
           >
             {letter}
           </button>
