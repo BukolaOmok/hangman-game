@@ -47,7 +47,7 @@ export default function HangmanGame() {
   const winOrLose = () => {
     if (missesCount >= maxMisses) {
       return "You lose! Too many misses";
-    } else if (missesCount < maxMisses && !wordToGuess.includes("_")) {
+    } else if (missesCount < maxMisses && !wordToGuess.includes("_ ")) {
       return "You win!";
     }
   };
