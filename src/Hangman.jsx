@@ -7,16 +7,17 @@ export default function HangmanGame() {
   const pickRandomWord = (randomWordData) => {
     const randomWordIndex = Math.floor(Math.random() * randomWordData.length);
     const randomWord = randomWordData[randomWordIndex];
-    return randomWord
+    return randomWord;
   };
 
-  const [selectedWord, setSelectedWord] = React.useState(pickRandomWord(randomWordData))
+  const [selectedWord, setSelectedWord] = React.useState(
+    pickRandomWord(randomWordData)
+  );
 
-  const splitWordToGuess = selectedWord.split("")
+  const splitWordToGuess = selectedWord.split("");
 
   const maxMisses = 10;
 
- 
   const [wordToGuess, setWordToGuess] = React.useState(
     splitWordToGuess.map(() => "_ ")
   );
@@ -25,9 +26,7 @@ export default function HangmanGame() {
 
   const revealGuessedLetters = (letter) => {
     const revealedLetters = wordToGuess.map((char, index) => {
-      if (
-        splitWordToGuess[index] === letter
-      ) {
+      if (splitWordToGuess[index] === letter) {
         return splitWordToGuess[index];
       } else {
         return char;
@@ -52,8 +51,6 @@ export default function HangmanGame() {
     setMissesCount((missesCount) => missesCount + 1);
   };
 
-
-
   const winOrLose = () => {
     if (missesCount >= maxMisses) {
       return "You lose! Too many misses" && `The word is: ${selectedWord}`;
@@ -61,10 +58,6 @@ export default function HangmanGame() {
       return "You win!";
     }
   };
-
-
-
-
 
   return (
     <div className="group-content">
