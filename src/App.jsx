@@ -15,7 +15,7 @@ export default function App() {
     pickRandomWord(randomWordData)
   );
 
-  const splitWordToGuess = selectedWord.split("");
+  let splitWordToGuess = selectedWord.split("");
 
   const maxMisses = 10;
 
@@ -74,13 +74,7 @@ export default function App() {
     }
   };
 
-  const handleNewGame = () => {
-    const newSelectedWord = pickRandomWord(randomWordData)
-    setSelectedWord(newSelectedWord)
-    setWordToGuess(splitWordToGuess.map(() => "_ "))
-    setGuessedLetters([])
-    updateMissesCount()
-  }
+
 
   return (
     <div className="group-content">
@@ -107,7 +101,7 @@ export default function App() {
           </button>
         ))}
       </div>
-      <button className = "new-game-button" onClick={handleNewGame}>New Game</button>
+      {/* <button className = "new-game-button" onClick={handleNewGame}>New Game</button> */}
     </div>
   );
 }
