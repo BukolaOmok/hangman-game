@@ -36,3 +36,12 @@ button:disabled {
   background-color: grey;
   border-color: grey;
 }
+
+.new-game-button{
+  background-color: white;
+  color: #000000;
+  align-content: space-between;
+  border-radius: 1rem;
+  padding: 1.2rem;
+  margin: 1rem
+}
