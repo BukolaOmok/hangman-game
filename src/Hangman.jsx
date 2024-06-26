@@ -18,13 +18,12 @@ export default function HangmanGame() {
   const handleGuess = (letter) => {
     if (!guessedLetters.includes(letter)) {
       setGuessedLetters((guessedLetters) => [...guessedLetters, letter]);
+
+      if (!selectedWord.includes(letter)){
+        setMissesCount(missesCount => missesCount + 1)
+      }
     }
   };
-
-  const wordToGuess = selectedWord
-    .split("")
-    .map((letter) => (guessedLetters.includes(letter) ? letter : "_ "))
-    .join("");
 
 
   const resetGame = () => {
@@ -32,6 +31,8 @@ export default function HangmanGame() {
     setGuessedLetters([]);
     setMissesCount(0);
   };
+
+
 
   return (
     <div className="group-content">
@@ -41,7 +42,6 @@ export default function HangmanGame() {
         guessedLetters={guessedLetters}
       />
       <GameStatus
-        wordToGuess={wordToGuess}
         guessedLetters={guessedLetters}
         selectedWord={selectedWord}
         maxMisses={maxMisses}
