@@ -1,7 +1,7 @@
 import React from "react";
 import WordDisplay from "./wordDisplay";
 
-function GameStatus(props) {
+export default function GameStatus(props) {
   if (props.missesCount >= props.maxMisses) {
     return (
       <div>
@@ -11,9 +11,8 @@ function GameStatus(props) {
         The word was: {props.selectedWord}
       </div>
     );
-  // } else if (!wordToGuess.includes("_ ")) {
-  //   return <div>You win!</div>;
+  } else if (!props.displayLetters.includes("_ ")) {
+    return <div>You win!</div>;
   } 
 }
 
-export default GameStatus;

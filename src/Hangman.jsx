@@ -15,6 +15,12 @@ export default function HangmanGame() {
   const [missesCount, setMissesCount] = React.useState(0);
   const maxMisses = 10;
 
+  const displayLetters = selectedWord
+  .split("")
+  .map((letter) => (guessedLetters.includes(letter) ? letter : "_ "))
+  .join("");
+
+
   const handleGuess = (letter) => {
     if (!guessedLetters.includes(letter)) {
       setGuessedLetters((guessedLetters) => [...guessedLetters, letter]);
@@ -40,8 +46,10 @@ export default function HangmanGame() {
       <WordDisplay
         selectedWord={selectedWord}
         guessedLetters={guessedLetters}
+        displayLetters={displayLetters}
       />
       <GameStatus
+        displayLetters={displayLetters}
         guessedLetters={guessedLetters}
         selectedWord={selectedWord}
         maxMisses={maxMisses}
