@@ -1,106 +1,63 @@
-// import "./App.css";
-// import React from "react";
-// import letterData from "./letterData";
-// import randomWordData from "./randomWordData";
+import React, { useState } from "react";
+import WordDisplay from "./wordDisplay";
+import LetterButtons from "./letterButtons";
+import GameStatus from "./gameStatus";
+import randomWordData from "./randomWordData";
 
-// export default function HangmanGame() {
-//   const pickRandomWord = (randomWordData) => {
-//     const randomWordIndex = Math.floor(Math.random() * randomWordData.length);
-//     const randomWord = randomWordData[randomWordIndex];
-//     return randomWord;
-//   };
+const pickRandomWord = () => {
+  const randomIndex = Math.floor(Math.random() * randomWordData.length);
+  return randomWordData[randomIndex];
+};
 
-//   const [selectedWord, setSelectedWord] = React.useState(
-//     pickRandomWord(randomWordData)
-//   );
+export default function HangmanGame() {
+  const [selectedWord, setSelectedWord] = useState(pickRandomWord());
+  const [guessedLetters, setGuessedLetters] = useState([]);
+  const [missesCount, setMissesCount] = React.useState(0);
+  const maxMisses = 10;
 
-//   const splitWordToGuess = selectedWord.split("");
+  const handleGuess = (letter) => {
+    if (!guessedLetters.includes(letter)) {
+      setGuessedLetters((guessedLetters) => [...guessedLetters, letter]);
+    }
+  };
 
-//   const maxMisses = 10;
+  const wordToGuess = selectedWord
+    .split("")
+    .map((letter) => (guessedLetters.includes(letter) ? letter : "_ "))
+    .join("");
 
-//   const [wordToGuess, setWordToGuess] = React.useState(
-//     splitWordToGuess.map(() => "_ ")
-//   );
-//   const [guessedLetters, setGuessedLetters] = React.useState([]);
 
-//   const revealGuessedLetters = (letter) => {
-//     const revealedLetters = wordToGuess.map((char, index) => {
-//       if (splitWordToGuess[index] === letter) {
-//         return splitWordToGuess[index];
-//       } else {
-//         return char;
-//       }
-//     });
-//     setWordToGuess(revealedLetters);
-//   };
+  const resetGame = () => {
+    setSelectedWord(pickRandomWord());
+    setGuessedLetters([]);
+    setMissesCount(0);
+  };
 
-//   const handleGuesses = (letter) => () => {
-//     if (!guessedLetters.includes(letter)) {
-//       const newGuessedLetters = [...guessedLetters, letter];
-//       setGuessedLetters(newGuessedLetters);
-//       if (selectedWord.includes(letter)) {
-//         revealGuessedLetters(letter, newGuessedLetters);
-//       } else {
-//         updateMissesCount(guessedLetters);
-//       }
-//     }
-//   };
+  return (
+    <div className="group-content">
+      <h1 className="heading-style">Bukola Hangman Game</h1>
+      <WordDisplay
+        selectedWord={selectedWord}
+        guessedLetters={guessedLetters}
+      />
+      <GameStatus
+        wordToGuess={wordToGuess}
+        guessedLetters={guessedLetters}
+        selectedWord={selectedWord}
+        maxMisses={maxMisses}
+        missesCount={missesCount}
+      />
+      <p className="misses-count-style">number of misses: {missesCount}</p>
 
-//   const updateMissesCount = (guessedLetters) => {
-//     return guessedLetters.length;
-//   };
-
-//   const winOrLose = () => {
-//     if (guessedLetters.length >= maxMisses) {
-//       return (
-//         <div>
-//           You lose! Too many misses
-//           <br />
-//           <br />
-//           The word is: {selectedWord}
-//         </div>
-//       );
-//     } else if (
-//       guessedLetters.length < maxMisses &&
-//       !wordToGuess.includes("_ ")
-//     ) {
-//       return "You win!";
-//     } else if (
-//       guessedLetters.length < maxMisses &&
-//       wordToGuess.includes("_ ")
-//     ) {
-//       return;
-//     }
-//   };
-
-//   // const
-
-//   return (
-//     <div className="group-content">
-//       <h1 className="heading-style">Bukola Hangman Game</h1>
-//       <h2 className="guessed-word-style">{wordToGuess}</h2>
-//       <p>{winOrLose()}</p>
-//       <p className="misses-count-style">
-//         number of misses: {updateMissesCount(guessedLetters)}
-//       </p>
-
-//       <div className="group-letter">
-//         {letterData.map((letter) => (
-//           <button
-//             key={letter}
-//             className="letter"
-//             onClick={handleGuesses(letter)}
-//             disabled={
-//               guessedLetters.includes(letter) ||
-//               !wordToGuess.includes("_ ") ||
-//               guessedLetters.length >= maxMisses
-//             }
-//           >
-//             {letter}
-//           </button>
-//         ))}
-//       </div>
-//       {/* <button>New Game</button> */}
-//     </div>
-//   );
-// }
+      <LetterButtons
+        handleGuess={handleGuess}
+        guessedLetters={guessedLetters}
+        maxMisses={maxMisses}
+        missesCount={missesCount}
+      />
+      <button onClick={resetGame} className="new-game-button">
+        New Game
+      </button>
+    </div>
+  );
+}
