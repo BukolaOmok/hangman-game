@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import WordDisplay from "./wordDisplay";
 import LetterButtons from "./letterButtons";
 import GameStatus from "./gameStatus";
