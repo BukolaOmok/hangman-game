@@ -10,8 +10,8 @@ const pickRandomWord = () => {
 };
 
 export default function HangmanGame() {
-  const [selectedWord, setSelectedWord] = useState(pickRandomWord());
-  const [guessedLetters, setGuessedLetters] = useState([]);
+  const [selectedWord, setSelectedWord] = React.useState(pickRandomWord());
+  const [guessedLetters, setGuessedLetters] = React.useState([]);
   const [missesCount, setMissesCount] = React.useState(0);
   const maxMisses = 10;
 
